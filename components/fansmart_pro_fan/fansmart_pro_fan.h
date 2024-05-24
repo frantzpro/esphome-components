@@ -47,31 +47,31 @@ class FanSmartProFan : public fan::FanCall, public Component, public EntityBase
   bool _is_off;
   uint8_t tx_count_;
   uint32_t tx_duration_;
-  fan::FanState *fan_state_;
+  fan::Fan *fan_state_;
 };
 
 template<typename... Ts> class PairAction : public Action<Ts...> {
  public:
-  explicit PairAction(esphome::fan::FanState *state) : state_(state) {}
+  explicit PairAction(esphome::fan::Fan *state) : state_(state) {}
 
   void play(Ts... x) override {
     ((FanSmartProFan *)this->state_->get_output())->on_pair();
   }
 
  protected:
-  esphome::fan::FanState *state_;
+  esphome::fan::Fan *state_;
 };
 
 template<typename... Ts> class UnpairAction : public Action<Ts...> {
  public:
-  explicit UnpairAction(esphome::fan::FanState *state) : state_(state) {}
+  explicit UnpairAction(esphome::fan::Fan *state) : state_(state) {}
 
   void play(Ts... x) override {
     ((FanSmartProFan *)this->state_->get_output())->on_unpair();
   }
 
  protected:
-  esphome::fan::FanState *state_;
+  esphome::fan::Fan *state_;
 };
 
 } //namespace fansmartpro
