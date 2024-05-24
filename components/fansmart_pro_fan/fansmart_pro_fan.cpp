@@ -103,37 +103,37 @@ fan::FanTraits FanSmartProFan::get_traits() {
 }
 
 void FanSmartProFan::write_state(fan::Fan *state) {
-  float cwf, wwf;
-  state->current_values_as_cwww(&cwf, &wwf, this->constant_brightness_);
+//  float cwf, wwf;
+//  state->current_values_as_cwww(&cwf, &wwf, this->constant_brightness_);
 
-  if (!cwf && !wwf) {
-    send_packet(CMD_TURN_OFF, 0, 0);
-    _is_off = true;
+//  if (!cwf && !wwf) {
+//    send_packet(CMD_TURN_OFF, 0, 0);
+//    _is_off = true;
 
-    return;
-  }
+//    return;
+//  }
 
-  uint8_t cwi = (uint8_t)(0xff * cwf);
-  uint8_t wwi = (uint8_t)(0xff * wwf);
+//  uint8_t cwi = (uint8_t)(0xff * cwf);
+//  uint8_t wwi = (uint8_t)(0xff * wwf);
 
-  if ((cwi < min_brightness_) && (wwi < min_brightness_)) {
-    if (cwf > 0.000001) {
-      cwi = min_brightness_;
-    }
+//  if ((cwi < min_brightness_) && (wwi < min_brightness_)) {
+//    if (cwf > 0.000001) {
+//      cwi = min_brightness_;
+//    }
 
-    if (wwf > 0.000001) {
-      wwi = min_brightness_;
-    }
-  }
+//    if (wwf > 0.000001) {
+//      wwi = min_brightness_;
+//    }
+//  }
 
   ESP_LOGD(TAG, "FanSmartProFan::write_state called! Requested cw: %d, ww: %d", cwi, wwi);
 
   if (_is_off) {
-    send_packet(CMD_TURN_ON, 0, 0);
+    send_packet(CMD_GENERIC_ONOFF, 0, 0);
     _is_off = false;
   }
 
-  send_packet(CMD_DIM, cwi, wwi);
+//  send_packet(CMD_DIM, cwi, wwi);
 }
 
 void FanSmartProFan::dump_config() {

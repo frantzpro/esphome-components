@@ -30,8 +30,10 @@ class FanSmartProFan : public fan::FanCall, public Component, public EntityBase
 //  void set_reversed(bool reversed) { reversed_ = reversed; }
 //  void set_min_brightness(uint8_t min_brightness) { min_brightness_ = min_brightness; }
 //  void set_tx_duration(uint32_t tx_duration) { tx_duration_ = tx_duration; }
-  void setup_state(fan::Fan *state) override { this->fan_state_ = state; }
-  void write_state(fan::Fan *state) override;
+//  void setup_state(fan::Fan *state) override { this->fan_state_ = state; }
+//  void write_state(fan::Fan *state) override;
+  void setup_state(fan::Fan *state) { this->fan_state_ = state; }
+  void write_state(fan::Fan *state);
 //  fan::FanTraits get_traits() override;
   fan::FanTraits get_traits();
   void on_pair();
