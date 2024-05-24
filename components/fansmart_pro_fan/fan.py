@@ -39,6 +39,11 @@ ACTION_ON_UNPAIR_SCHEMA = cv.All(
 )
 
 CONFIG_SCHEMA = cv.All(
+    fan.FAN_SCHEMA.extend(
+        {
+            cv.GenerateID(CONF_OUTPUT_ID): cv.declare_id(FanSmartProFan),
+	}
+    ),
 #    fan.RGB_LIGHT_SCHEMA.extend(
 #        {
 #            cv.GenerateID(CONF_OUTPUT_ID): cv.declare_id(FanSmartProFan),
