@@ -17,7 +17,7 @@ AUTO_LOAD = ["esp32_ble"]
 DEPENDENCIES = ["esp32"]
 
 fansmartpro_ns = cg.esphome_ns.namespace('fansmartpro')
-FanSmartProFan = fansmartpro_ns.class_('FanSmartProFan', cg.Component, fan.FanOutput)
+FanSmartProFan = fansmartpro_ns.class_('FanSmartProFan', cg.Component)
 PairAction = fansmartpro_ns.class_("PairAction", automation.Action)
 UnpairAction = fansmartpro_ns.class_("UnpairAction", automation.Action)
 
