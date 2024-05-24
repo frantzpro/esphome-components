@@ -52,27 +52,27 @@ class FanSmartProFan : public fan::FanCall, public Component, public EntityBase
 
 template<typename... Ts> class PairAction : public Action<Ts...> {
  public:
-  explicit PairAction(esphome::light::LightState *state) : state_(state) {}
+  explicit PairAction(esphome::fan::FanState *state) : state_(state) {}
 
   void play(Ts... x) override {
-    ((LampSmartProLight *)this->state_->get_output())->on_pair();
+    ((FanSmartProFan *)this->state_->get_output())->on_pair();
   }
 
  protected:
-  esphome::light::LightState *state_;
+  esphome::fan::FanState *state_;
 };
 
 template<typename... Ts> class UnpairAction : public Action<Ts...> {
  public:
-  explicit UnpairAction(esphome::light::LightState *state) : state_(state) {}
+  explicit UnpairAction(esphome::fan::FanState *state) : state_(state) {}
 
   void play(Ts... x) override {
-    ((LampSmartProLight *)this->state_->get_output())->on_unpair();
+    ((FanSmartProFan *)this->state_->get_output())->on_unpair();
   }
 
  protected:
-  esphome::light::LightState *state_;
+  esphome::fan::FanState *state_;
 };
 
-} //namespace lampsmartpro
+} //namespace fansmartpro
 } //namespace esphome
