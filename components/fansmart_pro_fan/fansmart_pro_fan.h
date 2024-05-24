@@ -56,7 +56,7 @@ template<typename... Ts> class PairAction : public Action<Ts...> {
   explicit PairAction(esphome::fan::Fan *state) : state_(state) {}
 
   void play(Ts... x) override {
-    ((FanSmartProFan *)this->state_->get_output())->on_pair();
+    ((FanSmartProFan *)this->state_)->on_pair();
   }
 
  protected:
@@ -68,7 +68,7 @@ template<typename... Ts> class UnpairAction : public Action<Ts...> {
   explicit UnpairAction(esphome::fan::Fan *state) : state_(state) {}
 
   void play(Ts... x) override {
-    ((FanSmartProFan *)this->state_->get_output())->on_unpair();
+    ((FanSmartProFan *)this->state_)->on_unpair();
   }
 
  protected:
