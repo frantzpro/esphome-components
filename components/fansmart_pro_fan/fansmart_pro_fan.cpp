@@ -126,7 +126,7 @@ void FanSmartProFan::write_state(fan::Fan *state) {
 //    }
 //  }
 
-  ESP_LOGD(TAG, "FanSmartProFan::write_state called! Requested cw: %d, ww: %d", cwi, wwi);
+//  ESP_LOGD(TAG, "FanSmartProFan::write_state called! Requested cw: %d, ww: %d", cwi, wwi);
 
   if (_is_off) {
     send_packet(CMD_GENERIC_ONOFF, 0, 0);
