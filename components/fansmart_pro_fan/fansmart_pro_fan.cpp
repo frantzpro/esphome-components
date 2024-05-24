@@ -137,12 +137,12 @@ void FanSmartProFan::write_state(fan::Fan *state) {
 }
 
 void FanSmartProFan::dump_config() {
-  ESP_LOGCONFIG(TAG, "FanSmartProFan '%s'", fan_state_ ? fan_state_->get_name().c_str() : "");
-  ESP_LOGCONFIG(TAG, "  Cold White Temperature: %f mireds", cold_white_temperature_);
-  ESP_LOGCONFIG(TAG, "  Warm White Temperature: %f mireds", warm_white_temperature_);
-  ESP_LOGCONFIG(TAG, "  Constant Brightness: %s", constant_brightness_ ? "true" : "false");
-  ESP_LOGCONFIG(TAG, "  Minimum Brightness: %d", min_brightness_);
-  ESP_LOGCONFIG(TAG, "  Transmission Duratoin: %d millis", tx_duration_);
+//  ESP_LOGCONFIG(TAG, "FanSmartProFan '%s'", fan_state_ ? fan_state_->get_name().c_str() : "");
+//  ESP_LOGCONFIG(TAG, "  Cold White Temperature: %f mireds", cold_white_temperature_);
+//  ESP_LOGCONFIG(TAG, "  Warm White Temperature: %f mireds", warm_white_temperature_);
+//  ESP_LOGCONFIG(TAG, "  Constant Brightness: %s", constant_brightness_ ? "true" : "false");
+//  ESP_LOGCONFIG(TAG, "  Minimum Brightness: %d", min_brightness_);
+//  ESP_LOGCONFIG(TAG, "  Transmission Duratoin: %d millis", tx_duration_);
 }
 
 void FanSmartProFan::on_pair() {
@@ -187,8 +187,8 @@ void FanSmartProFan::send_packet(uint16_t cmd, uint8_t cold, uint8_t warm) {
       .var2 = 0x0,
       .command = cmd,
       ._20 = 0,
-      .channel1 = reversed_ ? warm : cold,
-      .channel2 = reversed_ ? cold : warm,
+//      .channel1 = reversed_ ? warm : cold,
+//      .channel2 = reversed_ ? cold : warm,
       .signature_v3 = 0,
       ._26 = 0,
       .rand = seed,
