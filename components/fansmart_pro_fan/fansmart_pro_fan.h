@@ -15,7 +15,7 @@
 namespace esphome {
 namespace fansmartpro {
 
-class FanSmartProFan : public FanCall, public Component, public EntityBase
+class FanSmartProFan : public Fan::FanCall, public Component, public EntityBase
 #ifdef USE_API
   , public api::CustomAPIDevice
 #endif
