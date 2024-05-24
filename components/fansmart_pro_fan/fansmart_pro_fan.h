@@ -32,7 +32,8 @@ class FanSmartProFan : public fan::FanCall, public Component, public EntityBase
 //  void set_tx_duration(uint32_t tx_duration) { tx_duration_ = tx_duration; }
 //  void setup_state(light::LightState *state) override { this->light_state_ = state; }
 //  void write_state(light::LightState *state) override;
-  fan::FanTraits get_traits() override;
+//  fan::FanTraits get_traits() override;
+  fan::FanTraits get_traits();
   void on_pair();
   void on_unpair();
 
