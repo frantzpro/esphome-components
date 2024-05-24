@@ -102,7 +102,7 @@ fan::FanTraits FanSmartProFan::get_traits() {
   return traits;
 }
 
-void FanSmartProFan::write_state(fan::FanState *state) {
+void FanSmartProFan::write_state(fan::Fan *state) {
   float cwf, wwf;
   state->current_values_as_cwww(&cwf, &wwf, this->constant_brightness_);
 
