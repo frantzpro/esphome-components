@@ -8,7 +8,6 @@
 #include <mbedtls/aes.h>
 
 namespace esphome {
-// namespace fan {
 namespace fansmartpro {
 
 static const char *TAG = "fansmartpro";
@@ -97,53 +96,23 @@ void FanSmartProFan::setup() {
 
 fan::FanTraits FanSmartProFan::get_traits() {
   auto traits = fan::FanTraits();
-//  traits.set_supported_color_modes({fan::ColorMode::COLD_WARM_WHITE});
-//  traits.set_min_mireds(this->cold_white_temperature_);
-//  traits.set_max_mireds(this->warm_white_temperature_);
   return traits;
 }
 
 void FanSmartProFan::write_state(fan::Fan *state) {
-//  float cwf, wwf;
-//  state->current_values_as_cwww(&cwf, &wwf, this->constant_brightness_);
-
-//  if (!cwf && !wwf) {
-//    send_packet(CMD_TURN_OFF, 0, 0);
-//    _is_off = true;
-
-//    return;
-//  }
-
-//  uint8_t cwi = (uint8_t)(0xff * cwf);
-//  uint8_t wwi = (uint8_t)(0xff * wwf);
-
-//  if ((cwi < min_brightness_) && (wwi < min_brightness_)) {
-//    if (cwf > 0.000001) {
-//      cwi = min_brightness_;
-//    }
-
-//    if (wwf > 0.000001) {
-//      wwi = min_brightness_;
-//    }
-//  }
-
-//  ESP_LOGD(TAG, "FanSmartProFan::write_state called! Requested cw: %d, ww: %d", cwi, wwi);
 
   if (_is_off) {
     send_packet(CMD_GENERIC_ONOFF, 0, 0);
     _is_off = false;
+  } else {
+    send_packet(CMD_GENERIC_ONOFF, 0, 0);
+    _is_off = true;
   }
 
-//  send_packet(CMD_DIM, cwi, wwi);
 }
 
 void FanSmartProFan::dump_config() {
-//  ESP_LOGCONFIG(TAG, "FanSmartProFan '%s'", fan_state_ ? fan_state_->get_name().c_str() : "");
-//  ESP_LOGCONFIG(TAG, "  Cold White Temperature: %f mireds", cold_white_temperature_);
-//  ESP_LOGCONFIG(TAG, "  Warm White Temperature: %f mireds", warm_white_temperature_);
-//  ESP_LOGCONFIG(TAG, "  Constant Brightness: %s", constant_brightness_ ? "true" : "false");
-//  ESP_LOGCONFIG(TAG, "  Minimum Brightness: %d", min_brightness_);
-//  ESP_LOGCONFIG(TAG, "  Transmission Duratoin: %d millis", tx_duration_);
+  ESP_LOGCONFIG(TAG, "FanSmartProFan '%s'", fan_state_ ? fan_state_->get_name().c_str() : "");
 }
 
 void FanSmartProFan::on_pair() {
@@ -184,12 +153,12 @@ void FanSmartProFan::send_packet(uint16_t cmd, uint8_t cold, uint8_t warm) {
       .prefix = {0x02, 0x01, 0x02, 0x1B, 0x16, 0xF0, 0x08, 0x10, 0x80, 0x00},
       .packet_number = ++(this->tx_count_),
       .type = 0x100,
-      .identifier = fan_state_ ? fan_state_->get_object_id_hash() : 0xcafebabe,
+      .identifier = fan_state_ ? fan_state_->get_object_id_hash() : 0xcefabeba,
       .var2 = 0x0,
       .command = cmd,
       ._20 = 0,
-//      .channel1 = reversed_ ? warm : cold,
-//      .channel2 = reversed_ ? cold : warm,
+      .channel1 = reversed_ ? warm : cold,
+      .channel2 = reversed_ ? cold : warm,
       .signature_v3 = 0,
       ._26 = 0,
       .rand = seed,
@@ -206,7 +175,6 @@ void FanSmartProFan::send_packet(uint16_t cmd, uint8_t cold, uint8_t warm) {
 }
 
 } // namespace lampsmartpro
-// } // namespace fan
 } // namespace esphome
 
 #endif
