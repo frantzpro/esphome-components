@@ -8,6 +8,7 @@
 #include <mbedtls/aes.h>
 
 namespace esphome {
+// namespace fan {
 namespace fansmartpro {
 
 static const char *TAG = "fansmartpro";
@@ -205,6 +206,7 @@ void FanSmartProFan::send_packet(uint16_t cmd, uint8_t cold, uint8_t warm) {
 }
 
 } // namespace lampsmartpro
+// } // namespace fan
 } // namespace esphome
 
 #endif

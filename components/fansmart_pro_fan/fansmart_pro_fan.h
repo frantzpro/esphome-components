@@ -13,9 +13,10 @@
 #define CMD_SPEED (0x31)
 
 namespace esphome {
+// namespace fan {
 namespace fansmartpro {
 
-class FanSmartProFan : public fan::FanCall, public Component, public EntityBase
+class FanSmartProFan : public fan::Fan, public Component, public EntityBase
 #ifdef USE_API
   , public api::CustomAPIDevice
 #endif
@@ -35,11 +36,12 @@ class FanSmartProFan : public fan::FanCall, public Component, public EntityBase
   void setup_state(fan::Fan *state) { this->fan_state_ = state; }
   void write_state(fan::Fan *state);
 //  fan::FanTraits get_traits() override;
-  fan::FanTraits get_traits();
+  virtual void control(const fan::FanCall &call) {}
+  virtual fan::FanTraits get_traits();
   void on_pair();
   void on_unpair();
 
- protected:
+protected:
   void send_packet(uint16_t cmd, uint8_t cold, uint8_t warm);
 
 //  float cold_white_temperature_{167};
@@ -78,4 +80,5 @@ template<typename... Ts> class UnpairAction : public Action<Ts...> {
 };
 
 } //namespace fansmartpro
+// } //namespace fan
 } //namespace esphome
