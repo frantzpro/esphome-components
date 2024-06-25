@@ -41,7 +41,7 @@ CONFIG_SCHEMA = cv.All(
     fan.FAN_SCHEMA.extend(
         {
             cv.GenerateID(CONF_OUTPUT_ID): cv.declare_id(FanSmartPro),
-	}
+        }
     ),
     fan.RGB_LIGHT_SCHEMA.extend(
         {
@@ -65,22 +65,6 @@ async def to_code(config):
     await cg.register_component(var, config)
     await fan.register_fan(var, config)
 
-#    if CONF_COLD_WHITE_COLOR_TEMPERATURE in config:
-#        cg.add(
-#            var.set_cold_white_temperature(config[CONF_COLD_WHITE_COLOR_TEMPERATURE])
-#        )
-
-#    if CONF_WARM_WHITE_COLOR_TEMPERATURE in config:
-#        cg.add(
-#            var.set_warm_white_temperature(config[CONF_WARM_WHITE_COLOR_TEMPERATURE])
-#        )
-
-#    cg.add(var.set_constant_brightness(config[CONF_CONSTANT_BRIGHTNESS]))
-#    cg.add(var.set_reversed(config[CONF_REVERSED]))
-#    cg.add(var.set_min_brightness(config[CONF_MIN_BRIGHTNESS]))
-#    cg.add(var.set_tx_duration(config[CONF_DURATION]))
-
-
 @automation.register_action(
     "fansmartpro.pair", PairAction, ACTION_ON_PAIR_SCHEMA
 )
@@ -90,3 +74,4 @@ async def to_code(config):
 async def fansmartpro_pair_to_code(config, action_id, template_arg, args):
     parent = await cg.get_variable(config[CONF_ID])
     return cg.new_Pvariable(action_id, template_arg, parent)
+
