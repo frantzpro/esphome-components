@@ -1,8 +1,8 @@
-from esphome.components import fan
 from esphome import automation
-from esphome.const import CONF_OUTPUT_ID
+from esphome.components import fan
 import esphome.config_validation as cv
 import esphome.codegen as cg
+from esphome.const import CONF_OUTPUT_ID, CONF_ID
 
 DEPENDENCIES = ["esp32"]
 
