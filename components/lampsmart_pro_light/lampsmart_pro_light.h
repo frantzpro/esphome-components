@@ -11,6 +11,10 @@
 #define CMD_TURN_ON (0x10)
 #define CMD_TURN_OFF (0x11)
 #define CMD_DIM (0x21)
+#define CMD_FAN_ON (0x30)   // Beispiel-Kommando
+#define CMD_FAN_OFF (0x31)  // Beispiel-Kommando
+#define CMD_FAN_SPEED (0x32)  // Beispiel-Kommando
+#define CMD_FAN_SWING (0x33)  // Beispiel für Schwingung ein/aus
 
 namespace esphome {
 namespace lampsmartpro {
@@ -23,6 +27,10 @@ class LampSmartProLight : public light::LightOutput, public Component, public En
  public:
   void setup() override;
   void dump_config() override;
+
+  void set_fan_speed(uint8_t speed);
+  void turn_fan_on_off(bool on);
+  void toggle_fan_swing(bool active);
 
   void set_cold_white_temperature(float cold_white_temperature) { cold_white_temperature_ = cold_white_temperature; }
   void set_warm_white_temperature(float warm_white_temperature) { warm_white_temperature_ = warm_white_temperature; }

@@ -91,6 +91,9 @@ void LampSmartProLight::setup() {
 #ifdef USE_API
   register_service(&LampSmartProLight::on_pair, light_state_ ? "pair_" + light_state_->get_object_id() : "pair");
   register_service(&LampSmartProLight::on_unpair, light_state_ ? "unpair_" + light_state_->get_object_id() : "unpair");
+  register_service(&LampSmartProLight::set_fan_speed, "set_fan_speed", "speed");
+  register_service(&LampSmartProLight::turn_fan_on_off, "turn_fan_on_off", "on");
+  register_service(&LampSmartProLight::toggle_fan_swing, "toggle_fan_swing", "active");
 #endif
 }
 
@@ -143,6 +146,19 @@ void LampSmartProLight::dump_config() {
   ESP_LOGCONFIG(TAG, "  Constant Brightness: %s", constant_brightness_ ? "true" : "false");
   ESP_LOGCONFIG(TAG, "  Minimum Brightness: %d", min_brightness_);
   ESP_LOGCONFIG(TAG, "  Transmission Duratoin: %d millis", tx_duration_);
+}
+
+void LampSmartProLight::set_fan_speed(uint8_t speed) {
+    send_packet(CMD_FAN_SPEED, speed, 0);
+}
+
+void LampSmartProLight::turn_fan_on_off(bool on) {
+    uint16_t command = on ? CMD_FAN_ON : CMD_FAN_OFF;
+    send_packet(command, 0, 0);
+}
+
+void LampSmartProLight::toggle_fan_swing(bool active) {
+    send_packet(CMD_FAN_SWING, active ? 1 : 0, 0);
 }
 
 void LampSmartProLight::on_pair() {
